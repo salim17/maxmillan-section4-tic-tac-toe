@@ -4,8 +4,11 @@ export default function Player({ name, symbol }) {
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEditClick() {
-    setIsEditing(!isEditing);
-  }
+    //do not ever update the state like this, always use anonymous function, because in the background react schedules this update and is not synchronous
+    // setIsEditing(!isEditing); 
+    // setIsEditing(!isEditing); // try this by having this line twice
+    setIsEditing(editing => !editing); // now try this by having this line twice
+}
 
   let playerName = <span className="player-name">{name}</span>;
   if (isEditing) {
