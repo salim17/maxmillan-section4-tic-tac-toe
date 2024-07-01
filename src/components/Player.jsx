@@ -7,7 +7,7 @@ export default function Player({ initialName, symbol }) {
   function handleEditClick() {
     //do not ever update the state like this, always use anonymous function, because in the background react schedules this update and is not synchronous
     // setIsEditing(!isEditing);
-    // setIsEditing(!isEditing); // try this by having this line twice
+    // setIsEditing(!isEditing); // try this by having this line twice, ideally it should have no effect, but it does..
     setIsEditing((editing) => !editing); // now try this by having this line twice
   }
 
