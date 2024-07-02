@@ -6,7 +6,7 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function Gameboard() {
+export default function Gameboard({activePlayerSymbol, onSelectSquare}) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   // if your state is an object or an array, you have to update it in an immutable way!!!
@@ -30,12 +30,12 @@ export default function Gameboard() {
 
   // for arrays check below how it is done.. 
   function handleSelectSquare(rowIndex, colIndex) {
-    console.log("qeqeq");
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
-      updatedBoard[rowIndex][colIndex] = 'X';
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+    onSelectSquare();
   }
   return (
     <ol id="game-board">
