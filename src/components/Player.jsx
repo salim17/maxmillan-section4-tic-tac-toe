@@ -4,6 +4,8 @@ export default function Player({ initialName, symbol , isActive}) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
+  console.log('Player component loading ... ');
+
   function handleEditClick() {
     //do not ever update the state like this, always use anonymous function, because in the background react schedules this update and is not synchronous
     // setIsEditing(!isEditing);
