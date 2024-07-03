@@ -1,16 +1,25 @@
 import { useState } from "react";
 
-export default function Player({ initialName, symbol , isActive}) {
+export default function Player({
+  initialName,
+  symbol,
+  isActive,
+  onChangeName,
+}) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log('Player component loading ... ');
+  console.log("Player component loading ... ");
 
   function handleEditClick() {
     //do not ever update the state like this, always use anonymous function, because in the background react schedules this update and is not synchronous
     // setIsEditing(!isEditing);
     // setIsEditing(!isEditing); // try this by having this line twice, ideally it should have no effect, but it does..
     setIsEditing((editing) => !editing); // now try this by having this line twice
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   function handleChange(event) {
@@ -24,7 +33,7 @@ export default function Player({ initialName, symbol , isActive}) {
     );
   }
   return (
-    <li className={isActive ? 'active' : undefined}>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {editablePlayerName}
         <span className="player-symbol">{symbol}</span>
