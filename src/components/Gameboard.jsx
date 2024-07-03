@@ -1,10 +1,4 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function Gameboard({ onSelectSquare , turns}) {
+export default function Gameboard({ onSelectSquare, board }) {
   //   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   // if your state is an object or an array, you have to update it in an immutable way!!!
@@ -36,27 +30,19 @@ export default function Gameboard({ onSelectSquare , turns}) {
   //   onSelectSquare();
   // }
 
+  console.log("Gameboard component loading ... ");
 
-  console.log('Gameboard component loading ... ');
-
-
-  let gameBoard = initialGameBoard;
-
-  for(const turn of turns) {
-    const {square, player } = turn;
-    const { row, col} = square;
-
-    gameBoard[row][col] = player;
-
-  }
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => onSelectSquare(rowIndex, colIndex)} disabled={playerSymbol !== null}>
+                <button
+                  onClick={() => onSelectSquare(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
                   {playerSymbol}
                 </button>
               </li>
