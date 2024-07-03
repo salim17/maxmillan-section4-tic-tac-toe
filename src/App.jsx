@@ -25,12 +25,16 @@ function deriveActivePlayer(gameTurns) {
 function App() {
   // const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+  const [players, setPlayers] = useState({
+    X: "Player 1",
+    Y: "Player 2",
+  });
 
   console.log("App component loading ... ");
 
   const activePlayer = deriveActivePlayer(gameTurns);
 
-  let gameBoard = [...initialGameBoard.map(array => [...array])];
+  let gameBoard = [...initialGameBoard.map((array) => [...array])]; // deep clone because of reset game when game is won or over
 
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -90,20 +94,30 @@ function App() {
             isActive={activePlayer === "O"}
           />
         </ol>
-        {(winner || hasDrawn) && <Gameover winner={winner} onClick={handleRestart} />}
+        {(winner || hasDrawn) && (
+          <Gameover winner={winner} onClick={handleRestart} />
+        )}
         <Gameboard board={gameBoard} onSelectSquare={handleSelectSquare} />
       </div>
       <Log turns={gameTurns} />
     </main>
   );
 
-  function handleRestart(){
-    console.log('asdasd');
+  function handleRestart() {
+    console.log("asdasd");
     setGameTurns((prevs) => {
       return [];
-    })
+    });
+  }
+
+  function handlePlayerNameChange(symbol, newName) {
+    setPlayers((prevPlayers) => {
+      return {
+        ...prevPlayers,
+        [symbol]: newName,
+      };
+    });
   }
 }
-
 
 export default App;

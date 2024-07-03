@@ -1,4 +1,4 @@
-export default function Gameover({ winner , ...props}) {
+export default function Gameover({ winner, ...props }) {
   return (
     <div id="game-over">
       <h2>Game Over!</h2>
