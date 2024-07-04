@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Player({
   initialName,
@@ -9,7 +9,19 @@ export default function Player({
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
-  console.log("Player component loading ... ");
+  console.log(
+    "Player component loading ... " +
+      playerName +
+      " with initial name: " +
+      initialName
+  );
+
+  useEffect(() => {
+    console.log(
+      "use effect for: " + playerName + " with initial name: " + initialName
+    );
+    setPlayerName(initialName);
+  }, [initialName]);
 
   function handleEditClick() {
     //do not ever update the state like this, always use anonymous function, because in the background react schedules this update and is not synchronous
